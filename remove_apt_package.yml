@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: uninstall apt vim-nox package
+    apt:
+      name: vim-nox
+      state: absent

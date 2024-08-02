@@ -1,0 +1,29 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update apt reposidories
+    apt:
+      update_cache: yes
+
+  - name: install apt vim-nox package
+    apt:
+      name: vim-nox
+      state: latest
+
+  - name: install apt htop package
+    apt:
+      name: htop
+      state: latest
+
+  - name: install apt neofetch package
+    apt:
+      name: neofetch
+      state: latest
+
+  - name: install apt msr-tools package
+    apt:
+      name: msr-tools
+      state: latest
