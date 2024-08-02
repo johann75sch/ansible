@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Restart Debian family based systems
+    ansible.builtin.command: /sbin/shutdown -r -t now
+    when: ansible_facts['os_family'] == "Debian"

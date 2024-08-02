@@ -1,0 +1,24 @@
+---
+
+- name: Install XMRIG
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Create XMRIG directory if not exist
+      tags: ubuntu, mkdir
+      file:
+        path: /usr/local/bin/xmrig/
+        state: directory
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Copying a file and overwrite if changed
+      tags: ubuntu, copy
+      copy:
+        src: /home/johann75/ansible/xmrig/test
+        dest: /usr/local/bin/xmrig/
+        force: yes
+        owner: root
+        group: root
+        mode: 0644
+      when: ansible_facts['os_family'] == "Debian"

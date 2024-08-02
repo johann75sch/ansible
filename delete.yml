@@ -1,0 +1,13 @@
+---
+
+- name: Install XMRIG
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Delete a file if exists
+      tags: ubuntu, delete
+      file:
+        path: /usr/local/bin/xmrig/test
+        state: absent
+      when: ansible_facts['os_family'] == "Debian"
