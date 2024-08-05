@@ -1,0 +1,26 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Create johann75sch user
+      tags: always
+      user:
+        name: johann75sch
+        group: root
+
+    - name: Add SSH key for johann75sch user to allow SUDO without password
+      tags: always
+      authorized_key:
+        user: johann75sch
+        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPSTpyDM3Wdq+JQ/PRZg+PUe5NQ14Opo/kjKzCSghpdE Ubuntu Ansible Key"
+
+    - name: Add sudoers file for johann75sch user
+      tags: always
+      copy:
+        src: sudoer_johann75sch      #content "johann75sch ALL=(ALL) NOPASSWD: ALL" located in files directory of ansible
+        dest: /etc/sudoers.d/johann75sch
+        owner: root
+        group: root
+        mode: 0440

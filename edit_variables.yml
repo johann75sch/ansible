@@ -1,0 +1,18 @@
+---
+
+- name: Replace a part of the text in a file
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Editing a text file's multiple lines with variables from list
+      tags: ubuntu, edit
+      lineinfile:
+        path: /usr/local/bin/xmrig/test
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      loop:
+        - { regexp: '^text 1:', line: 'text1: some text 1 here' }
+        - { regexp: '^text 2:', line: 'text2: some text 2 here' }
+        - { regexp: '^text 3:', line: 'text3: some text 3 here' }
+      when: ansible_facts['os_family'] == "Debian"

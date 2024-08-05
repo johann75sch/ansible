@@ -1,0 +1,14 @@
+---
+
+- name: Replace a part of the text in a file
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Editing a text file line 1
+      tags: ubuntu, edit
+      lineinfile:
+        path: /usr/local/bin/xmrig/test
+        regexp: '^text 2:'
+        line: 'text 2: changed text' 
+      when: ansible_facts['os_family'] == "Debian"

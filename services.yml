@@ -1,0 +1,16 @@
+---
+
+- name: Linux Services
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Stop service
+      tags: ubuntu, stop-service
+      service:
+        name: qli-Client
+        state: restarted   #state: reloaded, restarted, started, stopped, got: stoped
+        enabled: yes       #no to disable
+        daemon_reload: yes
+      when: ansible_facts['os_family'] == "Debian"
+
